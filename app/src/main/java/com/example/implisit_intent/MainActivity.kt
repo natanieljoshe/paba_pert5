@@ -157,5 +157,41 @@ class MainActivity : AppCompatActivity() {
         btnGetPhoto.setOnClickListener {
             cameraLauncher.launch(null)
         }
+
+        val btnBukaMaps = findViewById<Button>(R.id.btnBukaMaps)
+        btnBukaMaps.setOnClickListener {
+            val _latitude="-7.24611"
+            val _longitude="112.73750"
+            val _labelTempat="Tugu Pahlawan"
+
+            val gmmIntentUri = Uri.parse("geo:$_latitude,$_longitude?q=$_labelTempat")
+
+            var _mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply{
+                setPackage("com.google.android.apps.maps")
+            }
+
+            if(_mapIntent.resolveActivity(packageManager)!=null){
+                startActivity(_mapIntent)
+            }else{
+                Toast.makeText(this,
+                    "Aplikasi Google Maps tidak ditemukan",
+                    Toast.LENGTH_LONG).show()
+
+                val _webUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=$_latitude,$_longitude")
+                _mapIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    _webUri)
+
+                try{
+                    startActivity(_mapIntent)
+                }catch(e2: Exception){
+                    Toast.makeText(this,
+                        "Tidak ada aplikasi browser yang tersedia",
+                        Toast.LENGTH_LONG).show()
+
+                }
+            }
+        }
+
     }
 }
