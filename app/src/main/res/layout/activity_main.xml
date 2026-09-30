@@ -44,5 +44,17 @@
         android:id="@+id/btnSetEvent"
         android:text="Set Event"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnGetPhoto"
+        android:text="Get Photo"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivHasil" />
+
+
 
 </LinearLayout>
