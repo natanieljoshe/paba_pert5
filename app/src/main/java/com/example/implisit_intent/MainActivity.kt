@@ -1,9 +1,12 @@
 package com.example.implisit_intent
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -58,5 +61,25 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(_timerIntent)
         }
+
+        val btnOpenURL = findViewById<Button>(R.id.btnOpenURL)
+        val etURL = findViewById<EditText>(R.id.etURL)
+        btnOpenURL.setOnClickListener {
+            val _webIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("http://"+ etURL.text.toString())
+            )
+
+            if (intent.resolveActivity(packageManager)!=null){
+                startActivity(_webIntent)
+            }else{
+                Toast.makeText(
+                    this,
+                    "Tidak ada aplikasi browser",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
     }
 }
